@@ -82,6 +82,35 @@
                 //2.2 跳转登录页面
                 window.location.href = './login.html';
             });
+
+
+
+            //3.一级菜单点击事件
+            $('.level01').click(function () {
+                //3.1排他思想
+                $(this).addClass('active').siblings().removeClass('active');
+                //3.2如果是文章管理;二级菜单ul滑动效果
+                if ($(this).index() == 1) {
+                    //(1)上下滑动的切换效果
+                    $('.level02').slideToggle();
+                    //箭头旋转切换动画
+                    $(this).find('b').toggleClass('rotate0');
+                    //(3)点击文章管理：默认触发 第一个li元素的点击事件
+                    /* 
+                    jq对象的 click() 方法 ： 只能触发 自己注册的点击事件   (等价于  DOM对象.onclick()  )
+                    DOM原生对象  click()方法： 同时触发 默认事件 + 自己注册的事件 
+                    */
+                    $('.level02>li:eq(0) a')[0].click();
+                } else {
+                    //点击其他一级菜单，取消二级菜单高亮
+                    $('.level02>li').removeClass('active');
+                }
+            });
+            //4 二级菜单点击事件
+            $('.level02').click(function () {
+                //4.1 排他思想
+                $(this).addClass('active').siblings().removeClass('active');
+            });
         });
     </script>
 </body>
